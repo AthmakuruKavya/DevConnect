@@ -1,10 +1,13 @@
 const express = require("express")
 const profileRoutes = express.Router();
+const bcrypt = require("bcrypt");
+
 const authUser = require("../middlewares/auth")
+const User = require("../models/user");
 
 profileRoutes.get("/profile/view",authUser, async (req, res) => {
   try {
-    console.log(req.user)
+    // console.log(req.user)
     res.status(200).send(req.user)
     
   } catch (error) {
@@ -27,11 +30,24 @@ profileRoutes.get("/profile/view",authUser, async (req, res) => {
   // }
 });
 
-profileRoutes.patch("/profile/password", async (req, res) =>{
+profileRoutes.patch("/profile/edit", async (req,res)=>{
+  
+})
+
+profileRoutes.patch("/profile/password", authUser,async (req, res) =>{
   try {
+    // write a validaion where req body should allow only update of password
+    const id = req.user._id;
+    const { firstName, lastName, email, password } = req.user;
+    const newPassword = req.body.password;
+    const hashPassword = await bcrypt.hash(newPassword, 10);
+    const updatePassword = await User.findByIdAndUpdate(id,{password:hashPassword},{ new: true, runValidators: true } )
+    console.log(updatePassword)
     
-  } catch (error) {
+    res.status(200).send("password changed successfully")
     
+  } catch (err) {
+    res.status(500).send(err.message)
   }
 })
 

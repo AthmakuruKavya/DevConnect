@@ -5,4 +5,16 @@ function validateSignup(req) {
     throw new Error("Invalid email");
   }
 }
-module.exports = {validateSignup}
+
+
+function validateEditProfile(req){
+  const ALLOWED_PROFILE_UPDATES = ["firstName","lastName","email","age","gender", "education", "hobbies", "photoUrl"];
+  const isUpdatesAllowed = Object.keys(req.body).every((key)=>(ALLOWED_PROFILE_UPDATES.includes(key)));
+  if(isUpdatesAllowed){
+
+  }else{
+    throw new Error("Unnecessary data send...")
+  }
+
+}
+module.exports = {validateSignup,validateEditProfile}
