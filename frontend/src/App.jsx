@@ -1,21 +1,25 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import Toaster from "react-hot-toast";
+
+import { Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Home from "./pages/Home"
+import Login from "./pages/Login";
+import Feed from "./pages/Feed";
 
 const App = () => {
   return (
     <>
-      <Router>
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="flex flex-col min-h-screen bg-base-200">
+        <Navbar/>
+        <main className="flex-grow flex items-center justify-center">
           <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route path="/" element={<Home/>} />
+            <Route path="/login" element={<Login/>} />
+            <Route path="/feed" element={<Feed/>} />
           </Routes>
-        </div>
-      </Router>
-      <Toaster position="top-right" reverseOrder={false} />
+        </main>
+        <Footer/>
+      </div>
     </>
   );
 };

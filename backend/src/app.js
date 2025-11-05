@@ -17,7 +17,7 @@ app.use(cors());
 
 
 
-app.use("/", authRoutes)
+app.use("/auth", authRoutes)
 app.use("/",profileRoutes)
 app.use("/connection",connectionRoutes)
 

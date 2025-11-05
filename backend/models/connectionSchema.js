@@ -10,6 +10,6 @@ const connectionSchema = new mongoose.Schema({
         type : String,
         enum : ["interested", "ignore", "accepted", "rejected"]
     }
-})
+},{timestamps:true})
 
 module.exports = mongoose.model("connection",connectionSchema)

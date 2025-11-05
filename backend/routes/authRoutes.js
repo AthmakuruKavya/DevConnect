@@ -51,7 +51,7 @@ authRoutes.post("/login", async (req, res) => {
     if (validUser) {
       const token = await jwt.sign(payload, "kavya@13", { expiresIn: "1h" });
       res.cookie("token", token);
-      res.status(200).send("login seccessful...!");
+      res.status(200).send(userData);
     } else {
       // throw new Error("Invalid credentials");
       return res.send("Invalid credentials...")
